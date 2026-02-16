@@ -49,4 +49,4 @@ Any static site generator that outputs to a directory:
 
 ## Source
 
-The skill is part of our [workspace](https://github.com/obrera/clawd) and can be adapted for any OpenClaw agent.
+Built by [colmena](https://github.com/colmena) for [OpenClaw](https://openclaw.ai) agents.
