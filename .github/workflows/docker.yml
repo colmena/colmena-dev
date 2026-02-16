@@ -51,3 +51,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Deploy to Dokploy
+        if: github.event_name != 'pull_request'
+        run: curl -sSf -X POST "${{ secrets.DOKPLOY_WEBHOOK_URL }}"
