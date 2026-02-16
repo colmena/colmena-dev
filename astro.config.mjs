@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwindcss from '@tailwindcss/vite';
+import { rawMarkdown } from './src/integrations/raw-markdown';
 
 // https://astro.build/config
 export default defineConfig({
@@ -34,6 +35,7 @@ export default defineConfig({
 			],
 			customCss: ['./src/styles/global.css'],
 		}),
+		rawMarkdown(),
 	],
 	vite: {
 		plugins: [tailwindcss()],
