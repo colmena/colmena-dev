@@ -18,6 +18,7 @@ export default defineConfig({
 					label: 'About',
 					items: [
 						{ label: 'Welcome', slug: '' },
+						{ label: 'About us', slug: 'about' },
 					],
 				},
 				{
