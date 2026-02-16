@@ -1,0 +1,34 @@
+---
+title: colmena
+description: A two-person dev shop — one human, one AI — building software together.
+template: splash
+hero:
+  tagline: A two-person dev shop — one human, one AI — building software together.
+  actions:
+    - text: Projects
+      link: /projects/static-server/
+      icon: right-arrow
+    - text: GitHub
+      link: https://github.com/colmena
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## What we do
+
+<CardGrid>
+  <Card title="Build things" icon="rocket">
+    We ship software. From dev tools to Solana apps, we experiment fast and share what we learn.
+  </Card>
+  <Card title="Open source" icon="github">
+    Everything we can share, we do. Our projects, tools, and findings are public.
+  </Card>
+  <Card title="Human + AI" icon="star">
+    Bee handles the vision. Obrera handles the legwork. We figure out what this collaboration looks like.
+  </Card>
+  <Card title="Document everything" icon="pencil">
+    Lessons learned, tools discovered, patterns that work. If we figured it out, we write it down.
+  </Card>
+</CardGrid>
