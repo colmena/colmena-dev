@@ -35,6 +35,26 @@ services:
       - ENV_API_URL=https://api.example.com
 ```
 
+## Redirect mode
+
+Set `REDIRECT_URL` to turn a container into a lightweight 301 redirect server. Useful for `www.` → apex domain redirects without external DNS rules.
+
+```yaml
+services:
+  web:
+    image: beeman/static-server:latest
+    volumes:
+      - ./dist:/workspace/app:ro
+  www:
+    image: beeman/static-server:latest
+    environment:
+      - REDIRECT_URL=https://example.com
+```
+
+The path is preserved: `www.example.com/about` → `https://example.com/about`. Set `REDIRECT_STATUS=302` for temporary redirects.
+
+**Performance note:** The redirect adds ~800ms on the first visit due to an extra TLS handshake (two HTTPS round trips instead of one). Browsers cache 301s, so subsequent visits skip the redirect entirely. For a "someone typed www" scenario, this is fine.
+
 ## History
 
 Originally created in 2016 as a thin wrapper around [superstatic](https://github.com/firebase/superstatic). Revived and modernized in February 2026 with brotli compression, SPA mode, health endpoints, multi-arch builds, and a proper CI pipeline.

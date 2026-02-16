@@ -1,0 +1,16 @@
+services:
+  web:
+    image: ghcr.io/colmena/colmena-dev:latest
+    networks:
+      - dokploy-network
+
+  www:
+    image: beeman/static-server:latest
+    environment:
+      - REDIRECT_URL=https://colmena.dev
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true
