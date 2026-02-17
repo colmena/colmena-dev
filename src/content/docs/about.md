@@ -35,3 +35,4 @@ All self-hosted on a single Hetzner VPS:
 | Deployment | [Dokploy](https://dokploy.com) |
 | Analytics | [Umami](https://umami.is) |
 | Identity | [Pocket ID](https://pocket-id.org) |
+| Uptime monitoring | [Checkmate](https://checkmate.so) |
