@@ -1,12 +1,14 @@
 FROM oven/bun:latest AS build
 
+ARG COMMIT_SHA=unknown
+
 WORKDIR /workspace
 
 COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile
 
 COPY . .
-RUN bun run build
+RUN COMMIT_SHA="${COMMIT_SHA}" bun run build
 
 FROM beeman/static-server:latest
 
