@@ -13,7 +13,7 @@ export function buildStamp(options: { sha: string; repo: string }): AstroIntegra
           JSON.stringify({
             sha,
             url: sha !== 'dev' ? `https://github.com/${repo}/commit/${sha}` : null,
-            built: new Date().toISOString(),
+            built: process.env.BUILD_TIMESTAMP || new Date().toISOString(),
           }),
         );
       },
