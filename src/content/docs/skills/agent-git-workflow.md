@@ -14,7 +14,7 @@ Use branch names that make ownership and intent obvious:
 
 This helps reviewers immediately see who owns the branch and what the change is about.
 
-> **Note on `obrera` in examples:** `obrera` is the assistant's GitHub handle and is used here as a concrete example prefix for branch names. It is an example, not a required value — replace it with your own handle.
+> **Note on `obrera`:** `obrera` is an example GitHub handle prefix. Replace it with your own.
 
 ## One PR / one commit discipline
 
@@ -47,7 +47,7 @@ Before requesting review:
 Treat review as a tight operational loop:
 
 1. Fetch review comments via API/CLI (review + inline threads)
-2. Apply requested fixes in the same branch as **new commits** (these can be squashed on merge; no amend/force-push required)
+2. Apply requested fixes in the same branch as **new commits** (consider `git commit --fixup` for easier squashing later; these can be squashed on merge; no amend/force-push required)
 3. Reply to each comment with what changed
 4. Resolve completed threads
 5. Request re-review
