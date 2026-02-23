@@ -54,11 +54,11 @@ TOKEN=$(curl -s $BASE/auth/login \
   "description": "Production API",
   "type": "http",
   "url": "https://api.example.com",
-  "interval": 60
+  "interval": 60000
 }
 ```
 
-Interval range: 30–3600 seconds.
+Interval range: 30000–3600000 milliseconds.
 
 ## Operational gotcha: monitor interval units
 
