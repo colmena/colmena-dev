@@ -60,6 +60,56 @@ TOKEN=$(curl -s $BASE/auth/login \
 
 Interval range: 30–3600 seconds.
 
+## Operational gotcha: monitor interval units
+
+**Critical:** in Checkmate runtime/DB documents, monitor `interval` is effectively treated as **milliseconds**.
+
+- ✅ Minute cadence in DB/runtime: `60000`
+- ❌ Bad value: `60` (seconds-like) can behave like near-1-second checks
+
+When many monitors have very low `interval` values, the scheduler can hammer CPU, network, and MongoDB with excessive check churn.
+
+### How to detect quickly
+
+1. **Check container pressure**
+   ```bash
+   docker stats --no-stream checkmate-server checkmate-mongo
+   ```
+2. **Inspect interval distribution** (look for unusually low values)
+   ```javascript
+   db.monitors.aggregate([
+     { $group: { _id: "$interval", count: { $sum: 1 } } },
+     { $sort: { _id: 1 } }
+   ])
+   ```
+3. **Validate recent check cadence**
+   - Sample recent checks/incidents and confirm they are roughly minute-spaced for normal monitors.
+   - If many entries are seconds apart, intervals are likely mis-scaled.
+
+### Safe remediation playbook
+
+1. **Backup monitor documents first**
+   ```bash
+   mongodump --db checkmate --collection monitors --out ./backup-$(date +%F-%H%M%S)
+   ```
+2. **Normalize low intervals to 60000 ms**
+   ```javascript
+   db.monitors.updateMany(
+     { interval: { $lt: 1000 } },
+     { $set: { interval: 60000 } }
+   )
+   ```
+3. **Restart Checkmate server** so scheduler state is refreshed.
+4. **Verify post-fix cadence**
+   - Monitor updates should return to ~1-minute intervals.
+   - `docker stats` should show reduced sustained load.
+
+### Optional hardening
+
+- Add retention/TTL policies for historical checks to cap collection growth.
+- Set CPU/memory limits on Checkmate and Mongo containers.
+- Reduce frequency for expensive monitor types (especially `pagespeed`).
+
 ## Links
 
 - [Checkmate GitHub](https://github.com/bluewave-labs/checkmate)
