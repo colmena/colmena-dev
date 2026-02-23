@@ -34,7 +34,7 @@ Why this works:
 
 Before requesting review:
 
-1. **Rebase/sync** with `main` and resolve conflicts locally
+1. **Rebase your branch onto `main`** and resolve conflicts locally
 2. **Self-review** the full diff in GitHub (files changed + rendered docs/screenshots)
 3. **Check PR metadata**:
    - clear title
@@ -47,7 +47,7 @@ Before requesting review:
 Treat review as a tight operational loop:
 
 1. Fetch review comments via API/CLI (review + inline threads)
-2. Apply requested fixes in the same branch
+2. Apply requested fixes in the same branch as **new commits** (these can be squashed on merge; no amend/force-push required)
 3. Reply to each comment with what changed
 4. Resolve completed threads
 5. Request re-review
