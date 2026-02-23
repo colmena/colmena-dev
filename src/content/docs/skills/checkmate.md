@@ -90,7 +90,7 @@ When many monitors have very low `interval` values, the scheduler can hammer CPU
 
 1. **Backup monitor documents first**
    ```bash
-   mongodump --db checkmate --collection monitors --out ./backup-$(date +%F-%H%M%S)
+   mongodump --db checkmate --collection monitors --archive=./monitors-backup-$(date +%F-%H%M%S).gz --gzip
    ```
 2. **Normalize low intervals to 60000 ms**
    ```javascript
